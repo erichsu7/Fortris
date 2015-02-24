@@ -49,17 +49,20 @@
 
   View.prototype.renderBlocks = function () {
     var that = this;
-    this.board.blocks.forEach(function (block) {
+    for (var coord in this.board.blocks) {
+      var block = this.board.blocks[coord];
       that.updateClasses(block.coord, block.color);
-    });
+    }
+    // 
+    // this.board.blocks.forEach(function (block) {
+    //   that.updateClasses(block.coord, block.color);
+    // });
   };
 
   View.prototype.renderPiece = function () {
     var that = this;
-    this.$li.filter(".piece").removeClass();
     this.board.piece.blocks.forEach(function (block) {
-      var className = "piece " + block.color;
-      that.updateClasses(block.coord, className);
+      that.updateClasses(block.coord, block.color);
     });
   };
 
@@ -85,13 +88,16 @@
 
   View.prototype.step = function () {
     this.board.stepPiece();
+    this.setupGrid();
     this.renderPiece();
+    this.renderBlocks();
     this.isOver();
   };
 
   View.prototype.isOver = function() {
     if (this.board.piece.isPlaced()) {
       this.board.addPiece(this.board.piece);
+
       this.board.piece = new Tetris.Piece.Random(this.board);
     }
   };

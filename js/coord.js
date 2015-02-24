@@ -16,4 +16,8 @@
     return (this.i === otherCoord.i + 1) && (this.j === otherCoord.j);
   };
 
+  Coord.prototype.print = function () {
+    return this.i + "," + this.j;
+  }
+
 })();
