@@ -7,12 +7,13 @@
     this.rows = rows;
     this.cols = cols;
     this.blocks = [];
-    this.piece = (new Tetris.Piece(this)).randomize(this);
+    this.piece = new Tetris.Piece.Random(this);
   };
 
   Board.prototype.addPiece = function (piece) {
+    var that = this;
     piece.blocks.forEach(function (block) {
-      this.blocks.push(block);
+      that.blocks.push(block);
     });
   };
 

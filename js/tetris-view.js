@@ -24,7 +24,7 @@
     40: "moveDown"
   };
 
-  View.STEP_MILLIS = 500;
+  View.STEP_MILLIS = 100;
 
   View.prototype.handleKeyEvent = function (event) {
     if (View.KEYS[event.keyCode]) {
@@ -90,6 +90,9 @@
   };
 
   View.prototype.isOver = function() {
-
+    if (this.board.piece.isPlaced()) {
+      this.board.addPiece(this.board.piece);
+      this.board.piece = new Tetris.Piece.Random(this.board);
+    }
   };
 })();
