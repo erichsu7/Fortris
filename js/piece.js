@@ -57,13 +57,50 @@
     return false;
   };
 
+  Piece.prototype.hasBlockOnRight = function () {
+    for (i = 0; i < this.blocks.length; i++) {
+      var nextCoord =
+        new Tetris.Coord(this.blocks[i].coord.i, this.blocks[i].coord.j + 1);
+      if (this.board.blocks[nextCoord.print()]) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  Piece.prototype.hasBlockOnLeft = function () {
+    for (i = 0; i < this.blocks.length; i++) {
+      var nextCoord =
+        new Tetris.Coord(this.blocks[i].coord.i, this.blocks[i].coord.j - 1);
+      if (this.board.blocks[nextCoord.print()]) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   Piece.prototype.moveRight = function () {
-    if (this.isAtRightEdge()) {
+    if (this.isAtRightEdge() || this.hasBlockOnRight()) {
     } else {
       this.blocks.forEach(function (block) {
         block.coord.j++;
       });
     }
+  };
+
+  Piece.prototype.moveLeft = function () {
+    if (this.isAtLeftEdge() || this.hasBlockOnLeft()) {
+    } else {
+      this.blocks.forEach(function (block) {
+        block.coord.j--;
+      });
+    }
+  };
+
+  Piece.prototype.moveDown = function () {
+    this.blocks.forEach(function (block) {
+      block.coord.i++;
+    })
   };
 
   Piece.prototype.isAtRightEdge = function () {

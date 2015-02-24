@@ -18,10 +18,10 @@
   };
 
   Board.prototype.stepPiece = function () {
-    this.piece.blocks.forEach(function (block) {
-      block.coord.i++;
-    });
+    this.piece.moveDown();
+  };
 
+  Board.prototype.checkPiece = function () {
     if (this.piece.isPlaced()) {
       this.addPiece(this.piece);
       this.piece = new Tetris.Piece.Random(this);
