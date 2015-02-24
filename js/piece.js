@@ -5,19 +5,21 @@
 
   var Piece = Tetris.Piece = function (board) {
     this.board = board;
-    this.offsets = [];
+    this.blockCoords = [];
     this.blocks = [];
+    this.position;
+    this.color = Tetris.Block.COLORS[Math.floor(Math.random() * Tetris.Block.COLORS.length)];
   };
 
   Piece.Random = function (board) {
     var pieceTypes = [
-      Tetris.OPiece,
-      Tetris.IPiece,
-      Tetris.SPiece,
-      Tetris.ZPiece,
-      Tetris.LPiece,
-      Tetris.JPiece,
-      Tetris.TPiece
+      // Tetris.OPiece,
+      Tetris.IPiece
+      // Tetris.SPiece,
+      // Tetris.ZPiece,
+      // Tetris.LPiece,
+      // Tetris.JPiece,
+      // Tetris.TPiece
     ];
 
     var pieceClass = pieceTypes[Math.floor(Math.random() * pieceTypes.length)];
@@ -27,10 +29,9 @@
 
   Piece.prototype.generateBlocks = function () {
     var that = this;
-    var randomColor = Tetris.Block.COLORS[Math.floor(Math.random() * Tetris.Block.COLORS.length)];
-    this.offsets.forEach(function (offset) {
-      var coord = new Tetris.Coord(0 + offset[0], (that.board.cols / 2) + offset[1]);
-      that.blocks.push(new Tetris.Block(coord, randomColor));
+    this.blockCoords.forEach(function (offset) {
+      var coord = new Tetris.Coord(offset[0], offset[1]);
+      that.blocks.push(new Tetris.Block(coord, that.color));
     });
   }
 

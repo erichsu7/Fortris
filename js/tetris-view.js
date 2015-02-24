@@ -31,22 +31,20 @@
       switch (event.keyCode) {
         case 37:
           this.board.piece.moveLeft();
-          this.render();
           break;
         case 38:
           this.board.piece.rotate();
           break;
         case 39:
           this.board.piece.moveRight();
-          this.render()
           break;
         case 40:
           this.board.piece.moveDown();
-          this.render();
           break;
         default:
           break;
       }
+      this.render();
     }
   };
 
