@@ -29,25 +29,20 @@
   };
 
   Board.prototype.findFullRows = function () {
-    var rowSum = 0;
-    for (i = 0; i < this.cols; i++) {
-      rowSum += i;
-    };
-
-    var rowSums = {};
+    var rowsHash = {};
     Object.keys(this.blocks).forEach(function (coordStr) {
       var coordArray = coordStr.split(",");
       var row = parseInt(coordArray[0]);
       var col = parseInt(coordArray[1]);
-      if (rowSums[row]) {
-        rowSums[row] += col;
+      if (rowsHash[row]) {
+        rowsHash[row].push(col);
       } else {
-        rowSums[row] = col;
+        rowsHash[row] = [col];
       }
     });
     var fullRows = [];
-    for (var row in rowSums) {
-      if (rowSums[row] === rowSum) {
+    for (var row in rowsHash) {
+      if (rowsHash[row].length === this.cols) {
         fullRows.push(row);
       }
     }
@@ -55,20 +50,29 @@
   };
 
   Board.prototype.deleteFullRows = function (fullRows) {
+    debugger;
     var that = this;
     this.fullRowCoords = [];
     for (i = 0; i < fullRows.length; i++) {
       for (j = 0; j < this.cols; j++) {
         var coordStr = fullRows[i] + "," + j;
         that.fullRowCoords.push(coordStr);
-        debugger;
       }
     }
 
-    debugger;
     this.fullRowCoords.forEach(function (coordStr) {
       delete that.blocks[coordStr];
+      that.shiftBlockDown(coordStr);
     })
   };
+
+  Board.prototype.shiftBlockDown = function (coordStr) {
+    var coordArray = coordStr.split(",").map(function (num) {
+      return parseInt(num);
+    });
+    debugger;
+    var coordStrRow = parseInt(coordStr.split(",")[0]);
+    var aboveCoordStr
+  }
 
 })();
