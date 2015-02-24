@@ -1,0 +1,52 @@
+html, body, header, nav, h1, a,
+ul, li, strong, main, button, i,
+section, img, div, h2, p, form,
+fieldset, label, input, textarea,
+span, article, footer, time, small {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: inherit;
+  font: inherit;
+  text-decoration: inherit;
+  text-align: inherit;
+  color: inherit;
+  background: transparent;
+}
+
+ul {
+  display: block;
+  list-style: none;
+  height: 20px;
+}
+
+li {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 20px;
+  width: 20px;
+  border: 1px solid black;
+}
+
+.red {
+
+}
+.orange {
+
+}
+.yellow {
+
+}
+.green {
+
+}
+.blue {
+
+}
+.cyan {
+
+}
+.purple {
+
+}
