@@ -49,10 +49,11 @@
   };
 
   View.prototype.render = function () {
+    this.board.checkPiece();
     this.setupGrid();
     this.renderPiece();
     this.renderBlocks();
-    this.board.checkPiece();
+
   }
 
   View.prototype.renderBlocks = function () {
