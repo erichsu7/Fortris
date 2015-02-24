@@ -50,29 +50,44 @@
   };
 
   Board.prototype.deleteFullRows = function (fullRows) {
-    debugger;
-    var that = this;
-    this.fullRowCoords = [];
     for (i = 0; i < fullRows.length; i++) {
-      for (j = 0; j < this.cols; j++) {
-        var coordStr = fullRows[i] + "," + j;
-        that.fullRowCoords.push(coordStr);
+      for (var coordStr in this.blocks) {
+        var coordArray = coordStr.split(",");
+        if (coordArray[0] === fullRows[i]) {
+          delete this.blocks[coordStr];
+        }
       }
     }
-
-    this.fullRowCoords.forEach(function (coordStr) {
-      delete that.blocks[coordStr];
-      that.shiftBlockDown(coordStr);
-    })
   };
 
-  Board.prototype.shiftBlockDown = function (coordStr) {
-    var coordArray = coordStr.split(",").map(function (num) {
-      return parseInt(num);
-    });
-    debugger;
-    var coordStrRow = parseInt(coordStr.split(",")[0]);
-    var aboveCoordStr
-  }
+
+  //
+  //
+  //   var that = this;
+  //   this.fullRowCoords = [];
+  //   for (i = 0; i < fullRows.length; i++) {
+  //     for (j = 0; j < this.cols; j++) {
+  //       var coordStr = fullRows[i] + "," + j;
+  //       that.fullRowCoords.push(coordStr);
+  //     }
+  //   }
+  //
+  //   this.fullRowCoords.forEach(function (coordStr) {
+  //     delete that.blocks[coordStr];
+  //   });
+  //
+  //   for (i = 0; )
+  // };
+  //
+  // Board.prototype.shiftAboveRowDown = function (fullRow) {
+  //   for (var coordStr in this.blocks) {
+  //     var coordArray = coordStr.split(",").map(function (num) {
+  //       return parseInt(num);
+  //     });
+  //
+  //   }
+  //
+  //
+  // }
 
 })();
