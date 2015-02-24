@@ -33,7 +33,7 @@
   };
 
   Piece.prototype.isPlaced = function () {
-    return this.isAtBottom();
+    return this.isOnBlock() || this.isAtBottom();
   };
 
   Piece.prototype.isAtBottom = function () {
@@ -45,5 +45,16 @@
     };
     return false;
   };
+
+  Piece.prototype.isOnBlock = function () {
+    for (i = 0; i < this.blocks.length; i++) {
+      var nextCoord =
+        new Tetris.Coord(this.blocks[i].coord.i + 1, this.blocks[i].coord.j);
+      if (this.board.blocks[nextCoord.print()]) {
+        return true;
+      }
+    }
+    return false;
+  }
 
 })();

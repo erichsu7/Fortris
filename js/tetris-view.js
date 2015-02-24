@@ -53,10 +53,6 @@
       var block = this.board.blocks[coord];
       that.updateClasses(block.coord, block.color);
     }
-    // 
-    // this.board.blocks.forEach(function (block) {
-    //   that.updateClasses(block.coord, block.color);
-    // });
   };
 
   View.prototype.renderPiece = function () {

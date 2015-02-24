@@ -18,9 +18,12 @@
   };
 
   Board.prototype.stepPiece = function () {
+    var isPlaced;
     this.piece.blocks.forEach(function (block) {
       block.coord.i++;
     });
+
+
   };
 
 })();
