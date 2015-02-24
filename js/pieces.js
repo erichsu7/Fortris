@@ -67,6 +67,33 @@
       [1, (this.board.cols / 2) - 2],
       [1, (this.board.cols / 2) - 1]
     ];
+    this.position = "h";
+    this.generateBlocks();
+  };
+
+  SPiece.inherits(Tetris.Piece);
+
+  SPiece.prototype.rotate = function () {
+    var pivotBlock = this.blocks[3];
+    var pivotCoord = pivotBlock.coord;
+    if (this.position === "h") {
+      this.blockCoords = [
+        [pivotCoord.i, pivotCoord.j + 1],
+        [pivotCoord.i + 1, pivotCoord.j + 1],
+        [pivotCoord.i - 1, pivotCoord.j],
+        [pivotCoord.i, pivotCoord.j]
+      ]
+      this.position = "v";
+    } else {
+      this.blockCoords = [
+        [pivotCoord.i - 1, pivotCoord.j],
+        [pivotCoord.i - 1, pivotCoord.j + 1],
+        [pivotCoord.i, pivotCoord.j - 1],
+        [pivotCoord.i, pivotCoord.j]
+      ]
+      this.position = "h";
+    }
+    this.blocks = [];
     this.generateBlocks();
   };
 
@@ -116,7 +143,7 @@
 
 
 
-  SPiece.inherits(Tetris.Piece);
+
   ZPiece.inherits(Tetris.Piece);
   LPiece.inherits(Tetris.Piece);
   JPiece.inherits(Tetris.Piece);

@@ -14,8 +14,8 @@
   Piece.Random = function (board) {
     var pieceTypes = [
       // Tetris.OPiece,
-      Tetris.IPiece
-      // Tetris.SPiece,
+      // Tetris.IPiece,
+      Tetris.SPiece
       // Tetris.ZPiece,
       // Tetris.LPiece,
       // Tetris.JPiece,
