@@ -55,6 +55,33 @@
       }
     }
     return false;
-  }
+  };
+
+  Piece.prototype.moveRight = function () {
+    if (this.isAtRightEdge()) {
+    } else {
+      this.blocks.forEach(function (block) {
+        block.coord.j++;
+      });
+    }
+  };
+
+  Piece.prototype.isAtRightEdge = function () {
+    for (i = 0; i < this.blocks.length; i++) {
+      if (this.blocks[i].coord.j === this.board.cols - 1) {
+          return true;
+      }
+    }
+    return false;
+  };
+
+  Piece.prototype.isAtLeftEdge = function () {
+    for (i = 0; i < this.blocks.length; i++) {
+      if (this.blocks[i].coord.j === 0) {
+          return true;
+      }
+    }
+    return false;
+  };
 
 })();
