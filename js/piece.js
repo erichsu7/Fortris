@@ -16,8 +16,8 @@
       // Tetris.OPiece,
       // Tetris.IPiece,
       // Tetris.SPiece,
-      Tetris.ZPiece
-      // Tetris.LPiece,
+      // Tetris.ZPiece,
+      Tetris.LPiece,
       // Tetris.JPiece,
       // Tetris.TPiece
     ];
