@@ -15,8 +15,8 @@
     var pieceTypes = [
       // Tetris.OPiece,
       // Tetris.IPiece,
-      Tetris.SPiece
-      // Tetris.ZPiece,
+      // Tetris.SPiece,
+      Tetris.ZPiece
       // Tetris.LPiece,
       // Tetris.JPiece,
       // Tetris.TPiece
