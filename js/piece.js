@@ -129,6 +129,14 @@
     })
   };
 
+  Piece.prototype.snapDown = function () {
+    while (!this.isPlaced()) {
+      this.blocks.forEach(function (block) {
+        block.coord.i++;
+      });
+    }
+  };
+
   Piece.prototype.isAtRightEdge = function () {
     for (i = 0; i < this.blocks.length; i++) {
       if (this.blocks[i].coord.j === this.board.cols - 1) {

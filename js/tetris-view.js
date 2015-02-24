@@ -18,17 +18,21 @@
   };
 
   View.KEYS = {
+    32: "snapDown",
     37: "moveLeft",
     38: "rotate",
     39: "moveRight",
     40: "moveDown"
   };
 
-  View.STEP_MILLIS = 500;
+  View.STEP_MILLIS = 1000;
 
   View.prototype.handleKeyEvent = function (event) {
     if (View.KEYS[event.keyCode]) {
       switch (event.keyCode) {
+        case 32:
+          this.board.piece.snapDown();
+          break;
         case 37:
           this.board.piece.moveLeft();
           break;
