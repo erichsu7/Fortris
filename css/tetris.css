@@ -30,23 +30,29 @@ li {
 }
 
 .red {
-
+  background-color: #FF0000;
 }
+
 .orange {
-
+  background-color: #FF6600;
 }
+
 .yellow {
-
+  background-color: #FFFF00;
 }
+
 .green {
-
+  background-color: #00CC00;
 }
+
 .blue {
-
+  background-color: #3000FF;
 }
+
 .cyan {
-
+  background-color: #00FFFF;
 }
-.purple {
 
+.purple {
+  background-color: #6600FF;
 }

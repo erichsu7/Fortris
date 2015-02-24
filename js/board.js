@@ -16,4 +16,10 @@
     });
   };
 
+  Board.prototype.stepPiece = function () {
+    this.piece.blocks.forEach(function (block) {
+      block.coord.i++;
+    });
+  };
+
 })();

@@ -24,7 +24,7 @@
     40: "moveDown"
   };
 
-  View.STEP_MILLIS = 100;
+  View.STEP_MILLIS = 500;
 
   View.prototype.handleKeyEvent = function (event) {
     if (View.KEYS[event.keyCode]) {
@@ -47,14 +47,19 @@
     }
   };
 
-  View.prototype.render = function () {
+  View.prototype.renderBlocks = function () {
     var that = this;
     this.board.blocks.forEach(function (block) {
       that.updateClasses(block.coord, block.color);
     });
+  };
 
+  View.prototype.renderPiece = function () {
+    var that = this;
+    this.$li.filter(".piece").removeClass();
     this.board.piece.blocks.forEach(function (block) {
-      that.updateClasses(block.coord, block.color);
+      var className = "piece " + block.color;
+      that.updateClasses(block.coord, className);
     });
   };
 
@@ -79,8 +84,8 @@
   };
 
   View.prototype.step = function () {
-    // this.board.move();
-    this.render();
+    this.board.stepPiece();
+    this.renderPiece();
     this.isOver();
   };
 
