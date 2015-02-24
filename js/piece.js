@@ -31,7 +31,7 @@
     var that = this;
     this.blockCoords.forEach(function (offset) {
       var coord = new Tetris.Coord(offset[0], offset[1]);
-      that.blocks.push(new Tetris.Block(coord, that.color));
+      that.blocks.push(new Tetris.Block(coord, that.color, that.board));
     });
   }
 
@@ -42,7 +42,7 @@
   Piece.prototype.isAtBottom = function () {
     var that = this;
     for (i = 0; i < this.blocks.length; i++) {
-      if (this.blocks[i].coord.i === this.board.rows - 1) {
+      if (this.blocks[i].isAtBottom()) {
         return true;
       };
     };
@@ -51,9 +51,7 @@
 
   Piece.prototype.isOnBlock = function () {
     for (i = 0; i < this.blocks.length; i++) {
-      var nextCoord =
-        new Tetris.Coord(this.blocks[i].coord.i + 1, this.blocks[i].coord.j);
-      if (this.board.blocks[nextCoord.print()]) {
+      if (this.blocks[i].isOnBlock()) {
         return true;
       }
     }
