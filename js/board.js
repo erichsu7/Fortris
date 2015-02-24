@@ -18,12 +18,14 @@
   };
 
   Board.prototype.stepPiece = function () {
-    var isPlaced;
     this.piece.blocks.forEach(function (block) {
       block.coord.i++;
     });
 
-
+    if (this.piece.isPlaced()) {
+      this.addPiece(this.piece);
+      this.piece = new Tetris.Piece.Random(this);
+    }
   };
 
 })();

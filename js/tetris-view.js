@@ -83,18 +83,17 @@
   };
 
   View.prototype.step = function () {
-    this.board.stepPiece();
-    this.setupGrid();
-    this.renderPiece();
-    this.renderBlocks();
-    this.isOver();
+    if (this.board.piece.isPlaced()) {
+      console.log("Game over");
+    } else {
+      this.board.stepPiece();
+      this.setupGrid();
+      this.renderPiece();
+      this.renderBlocks();
+      this.isOver();
+    }
   };
 
   View.prototype.isOver = function() {
-    if (this.board.piece.isPlaced()) {
-      this.board.addPiece(this.board.piece);
-
-      this.board.piece = new Tetris.Piece.Random(this.board);
-    }
   };
 })();
