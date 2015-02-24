@@ -14,6 +14,7 @@
   ZPiece.inherits(Tetris.Piece);
 
   ZPiece.prototype.rotate = function () {
+    this.ogBlocks = this.blocks;
     var pivotBlock = this.blocks[2];
     var pivotCoord = pivotBlock.coord;
     if (this.position === "h") {
@@ -35,5 +36,8 @@
     }
     this.blocks = [];
     this.generateBlocks();
+    if (this.isOffScreen() || this.isInBlock()) {
+      this.blocks = this.ogBlocks;
+    }
   };
 })();

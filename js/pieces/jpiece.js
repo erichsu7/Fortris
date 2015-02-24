@@ -14,6 +14,7 @@
   JPiece.inherits(Tetris.Piece);
 
   JPiece.prototype.rotate = function () {
+    this.ogBlocks = this.blocks;
     var pivotBlock = this.blocks[1];
     var pivotCoord = pivotBlock.coord;
     if (this.position === "r") {
@@ -51,5 +52,8 @@
     }
     this.blocks = [];
     this.generateBlocks();
+    if (this.isOffScreen() || this.isInBlock()) {
+      this.blocks = this.ogBlocks;
+    }
   };
 })();

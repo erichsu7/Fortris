@@ -60,6 +60,29 @@
     return false;
   };
 
+  Piece.prototype.isInBlock = function () {
+    for (i = 0; i < this.blocks.length; i++) {
+      var coord = this.blocks[i].coord;
+      if (this.board.blocks[coord.print()]) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  Piece.prototype.isOffScreen = function () {
+    for (i = 0; i < this.blocks.length; i++) {
+      var coord = this.blocks[i].coord;
+      if (coord.j < 0 ||
+          coord.j > this.board.cols - 1 ||
+          coord.i < 0 ||
+          coord.i > this.board.rows - 1) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   Piece.prototype.hasBlockOnRight = function () {
     for (i = 0; i < this.blocks.length; i++) {
       var nextCoord =
