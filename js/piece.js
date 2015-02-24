@@ -18,8 +18,8 @@
       // Tetris.SPiece,
       // Tetris.ZPiece,
       // Tetris.LPiece,
-      Tetris.JPiece
-      // Tetris.TPiece
+      // Tetris.JPiece,
+      Tetris.TPiece
     ];
 
     var pieceClass = pieceTypes[Math.floor(Math.random() * pieceTypes.length)];
