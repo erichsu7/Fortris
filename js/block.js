@@ -38,4 +38,18 @@
     }
     return false;
   };
+
+  Block.prototype.isPlaced = function () {
+    return this.isOnBlock() || this.isAtBottom();
+  };
+
+  Block.prototype.snapDown = function () {
+    while (!this.isPlaced()) {
+        this.moveDown();
+    }
+  };
+
+  Block.prototype.moveDown = function () {
+    this.coord.i++;
+  };
 })();

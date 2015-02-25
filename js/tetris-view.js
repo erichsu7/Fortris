@@ -66,7 +66,7 @@
     var that = this;
     for (var coord in this.board.blocks) {
       var block = this.board.blocks[coord];
-      that.updateClasses(block.coord, block.color);
+      block && that.updateClasses(block.coord, block.color);
     }
   };
 

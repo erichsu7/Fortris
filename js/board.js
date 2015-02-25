@@ -58,11 +58,29 @@
         }
       }
     }
+
+    this.shiftBlocksDown(fullRows);
   };
 
-  Board.prototype.shiftRowsDown = function (bottomRow) {
-    
-  }
+  Board.prototype.shiftBlocksDown = function (fullRows) {
+    for (i = 0; i < fullRows.length; i++) {
+      for (var coordStr in this.blocks) {
+        var coordStrArray = coordStr.split(",").map(function(num) {
+          return parseInt(num);
+        });
+        if (coordStrArray[0] < parseInt(fullRows[i])) {
+          var block = this.blocks[coordStr];
+          if (block) {
+            block.moveDown();
+            var newCoordStr = block.coord.i + "," + block.coord.j;
+            this.blocks[newCoordStr] = block;
+            this.blocks[coordStr] = null;
+          }
+        }
+      }
+    }
+  };
+
 
 
 
