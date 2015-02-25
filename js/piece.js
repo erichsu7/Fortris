@@ -42,7 +42,8 @@
   Piece.prototype.isAtBottom = function () {
     var that = this;
     for (i = 0; i < this.blocks.length; i++) {
-      if (this.blocks[i].isAtBottom()) {
+      var block = this.blocks[i];
+      if (block.isAtBottom()) {
         return true;
       };
     };
@@ -51,7 +52,8 @@
 
   Piece.prototype.isOnBlock = function () {
     for (i = 0; i < this.blocks.length; i++) {
-      if (this.blocks[i].isOnBlock()) {
+      var block = this.blocks[i];
+      if (block.isOnBlock()) {
         return true;
       }
     }
@@ -60,8 +62,8 @@
 
   Piece.prototype.isInBlock = function () {
     for (i = 0; i < this.blocks.length; i++) {
-      var coord = this.blocks[i].coord;
-      if (this.board.blocks[coord.print()]) {
+      var block = this.blocks[i];
+      if (block.isInBlock()) {
         return true;
       }
     }
@@ -70,11 +72,8 @@
 
   Piece.prototype.isOffScreen = function () {
     for (i = 0; i < this.blocks.length; i++) {
-      var coord = this.blocks[i].coord;
-      if (coord.j < 0 ||
-          coord.j > this.board.cols - 1 ||
-          coord.i < 0 ||
-          coord.i > this.board.rows - 1) {
+      var block = this.blocks[i];
+      if (block.isOffScreen()) {
         return true;
       }
     }
@@ -83,9 +82,8 @@
 
   Piece.prototype.hasBlockOnRight = function () {
     for (i = 0; i < this.blocks.length; i++) {
-      var nextCoord =
-        new Tetris.Coord(this.blocks[i].coord.i, this.blocks[i].coord.j + 1);
-      if (this.board.blocks[nextCoord.print()]) {
+      var block = this.blocks[i];
+      if (block.hasBlockOnRight()) {
         return true;
       }
     }
@@ -94,9 +92,8 @@
 
   Piece.prototype.hasBlockOnLeft = function () {
     for (i = 0; i < this.blocks.length; i++) {
-      var nextCoord =
-        new Tetris.Coord(this.blocks[i].coord.i, this.blocks[i].coord.j - 1);
-      if (this.board.blocks[nextCoord.print()]) {
+      var block = this.blocks[i];
+      if (block.hasBlockOnLeft()) {
         return true;
       }
     }
@@ -123,22 +120,23 @@
 
   Piece.prototype.moveDown = function () {
     this.blocks.forEach(function (block) {
-      block.coord.i++;
+      block.moveDown();
     })
   };
 
   Piece.prototype.snapDown = function () {
     while (!this.isPlaced()) {
       this.blocks.forEach(function (block) {
-        block.coord.i++;
+        block.moveDown();
       });
     }
   };
 
   Piece.prototype.isAtRightEdge = function () {
     for (i = 0; i < this.blocks.length; i++) {
-      if (this.blocks[i].coord.j === this.board.cols - 1) {
-          return true;
+      var block = this.blocks[i];
+      if (block.isAtRightEdge()) {
+        return true;
       }
     }
     return false;
@@ -146,8 +144,9 @@
 
   Piece.prototype.isAtLeftEdge = function () {
     for (i = 0; i < this.blocks.length; i++) {
-      if (this.blocks[i].coord.j === 0) {
-          return true;
+      var block = this.blocks[i];
+      if (block.isAtLeftEdge()) {
+        return true;
       }
     }
     return false;

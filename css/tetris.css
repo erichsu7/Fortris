@@ -57,3 +57,16 @@ li {
 .purple {
   background-color: #6600FF;
 }
+
+.red,
+  .orange,
+  .yellow,
+  .green,
+  .blue,
+  .cyan,
+  .purple {
+    border-left: 3px solid rgba(0,0,0,0.1);
+    border-top: 3px solid rgba(0,0,0,0.1);
+    border-right: 3px solid rgba(0,0,0,0.5);
+    border-bottom: 3px solid rgba(0,0,0,0.5);
+  }

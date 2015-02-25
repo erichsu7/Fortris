@@ -9,11 +9,7 @@
     this.board = new Tetris.Board(20, 10);
     this.setupGrid();
 
-    this.intervalId = window.setInterval(
-      this.step.bind(this),
-      View.STEP_MILLIS
-    );
-
+    this.step();
     $(window).on("keydown", this.handleKeyEvent.bind(this));
   };
 
@@ -89,9 +85,11 @@
       }
       html += "</ul>";
     }
+    html += "<div class=\"stats\"></div>";
 
     this.$el.html(html);
     this.$li = this.$el.find("li");
+    this.renderStats();
   };
 
   View.prototype.step = function () {
@@ -101,9 +99,21 @@
       this.board.stepPiece();
       this.render();
       this.isOver();
+      window.clearInterval(this.intervalId);
+      this.intervalId = window.setInterval(
+        this.step.bind(this),
+        View.STEP_MILLIS/this.board.level
+      );
     }
   };
 
   View.prototype.isOver = function() {
   };
+
+  View.prototype.renderStats = function () {
+    var $stats = this.$el.find(".stats");
+    var html = "<div class=\"level-container\">" + this.board.level + "</div>";
+    html += "<div class=\"cleared-rows-container\">" + this.board.clearedRows + "</div>";
+    $stats.html(html);
+  }
 })();

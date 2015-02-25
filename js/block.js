@@ -19,10 +19,6 @@
     "purple"
   ];
 
-  Block.prototype.isAbove = function (otherBlock) {
-    return this.coord.isAbove(otherBlock.coord);
-  };
-
   Block.prototype.isAtBottom = function () {
     if (this.coord.i === this.board.rows - 1) {
       return true;
@@ -31,10 +27,25 @@
   };
 
   Block.prototype.isOnBlock = function () {
-    var nextCoord =
-      new Tetris.Coord(this.coord.i + 1, this.coord.j);
-    if (this.board.blocks[nextCoord.print()]) {
-      return true;
+    var rowBelow = this.coord.i + 1;
+    var rowBlocks = this.board.blocks[rowBelow];
+    for (i = 0; i < rowBlocks.length; i++) {
+      var rowBlock = rowBlocks[i];
+      if (this.coord.j === rowBlock.coord.j) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  Block.prototype.isInBlock = function () {
+    var row = this.coord.i;
+    var rowBlocks = this.board.blocks[row];
+    for (i = 0; i < rowBlocks.length; i++) {
+      var rowBlock = rowBlocks[i];
+      if (this.coord.j === rowBlock.coord.j) {
+        return true;
+      }
     }
     return false;
   };
@@ -43,13 +54,59 @@
     return this.isOnBlock() || this.isAtBottom();
   };
 
-  Block.prototype.snapDown = function () {
-    while (!this.isPlaced()) {
-        this.moveDown();
+  Block.prototype.isOffScreen = function () {
+    if (this.coord.j < 0 ||
+        this.coord.j > this.board.cols - 1 ||
+        this.coord.i < 0 ||
+        this.coord.i > this.board.rows - 1) {
+      return true;
     }
+    return false;
+  };
+
+  Block.prototype.hasBlockOnLeft = function () {
+    var row = this.coord.i;
+    var rowBlocks = this.board.blocks[row];
+    for (i = 0; i < rowBlocks.length; i++) {
+      var rowBlock = rowBlocks[i];
+      if (this.coord.j === rowBlock.coord.j - 1) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  Block.prototype.hasBlockOnRight = function () {
+    var row = this.coord.i;
+    var rowBlocks = this.board.blocks[row];
+    for (i = 0; i < rowBlocks.length; i++) {
+      var rowBlock = rowBlocks[i];
+      if (this.coord.j === rowBlock.coord.j + 1) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  Block.prototype.isAtRightEdge = function () {
+    if (this.coord.j === this.board.cols - 1) {
+      return true;
+    }
+
+    return false;
+  };
+
+  Block.prototype.isAtLeftEdge = function () {
+    if (this.coord.j === 0) {
+      return true;
+    }
+
+    return false;
   };
 
   Block.prototype.moveDown = function () {
     this.coord.i++;
   };
+
+
 })();

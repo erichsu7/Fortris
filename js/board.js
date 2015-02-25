@@ -8,12 +8,20 @@
     this.cols = cols;
     this.blocks = {};
     this.piece = new Tetris.Piece.Random(this);
+    this.clearedRows = 0;
+    this.level = 1;
   };
 
   Board.prototype.addPiece = function (piece) {
     var that = this;
     piece.blocks.forEach(function (block) {
-      that.blocks[block.coord.print()] = block;
+      var row = block.coord.i;
+      var rowBlocks = that.blocks[row];
+      if (rowBlocks && rowBlocks.length > 0) {
+        that.blocks[row].push(block);
+      } else {
+        that.blocks[row] = [block];
+      }
     });
   };
 
@@ -26,8 +34,11 @@
       this.addPiece(this.piece);
       this.piece = new Tetris.Piece.Random(this);
       var fullRows = this.findFullRows();
-      fullRows.length > 0 && this.deleteFullRows(fullRows);
-      console.log(Object.keys(this.blocks).length);
+      if (fullRows.length > 0) {
+        this.deleteFullRows(fullRows);
+        this.clearedRows += fullRows.length;
+        this.level = Math.floor(this.clearedRows / 10) + 1;
+      }
     }
   };
 
@@ -53,17 +64,14 @@
   };
 
   Board.prototype.deleteFullRows = function (fullRows) {
-    var deletedBlocks = [];
     for (i = 0; i < fullRows.length; i++) {
       for (var coordStr in this.blocks) {
         var coordArray = coordStr.split(",");
         if (coordArray[0] === fullRows[i]) {
-          deletedBlocks.push(this.blocks[coordStr]);
           delete this.blocks[coordStr];
         }
       }
     }
-    console.log(deletedBlocks.length);
     this.shiftBlocksDown(fullRows);
   };
 
