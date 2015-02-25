@@ -25,6 +25,9 @@
     if (this.piece.isPlaced()) {
       this.addPiece(this.piece);
       this.piece = new Tetris.Piece.Random(this);
+      var fullRows = this.findFullRows();
+      fullRows.length > 0 && this.deleteFullRows(fullRows);
+      console.log(Object.keys(this.blocks).length);
     }
   };
 
@@ -50,15 +53,17 @@
   };
 
   Board.prototype.deleteFullRows = function (fullRows) {
+    var deletedBlocks = [];
     for (i = 0; i < fullRows.length; i++) {
       for (var coordStr in this.blocks) {
         var coordArray = coordStr.split(",");
         if (coordArray[0] === fullRows[i]) {
+          deletedBlocks.push(this.blocks[coordStr]);
           delete this.blocks[coordStr];
         }
       }
     }
-
+    console.log(deletedBlocks.length);
     this.shiftBlocksDown(fullRows);
   };
 
@@ -74,7 +79,7 @@
             block.moveDown();
             var newCoordStr = block.coord.i + "," + block.coord.j;
             this.blocks[newCoordStr] = block;
-            this.blocks[coordStr] = null;
+            delete this.blocks[coordStr];
           }
         }
       }

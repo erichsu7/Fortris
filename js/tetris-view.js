@@ -54,12 +54,9 @@
 
   View.prototype.render = function () {
     this.board.checkPiece();
-    var fullRows = this.board.findFullRows();
-    fullRows.length > 0 && this.board.deleteFullRows(fullRows);
     this.setupGrid();
     this.renderPiece();
     this.renderBlocks();
-
   }
 
   View.prototype.renderBlocks = function () {
