@@ -95,7 +95,6 @@
       }
       html += "</ul>";
     }
-    html += "<div class=\"stats\"></div>";
 
     this.$el.html(html);
     this.$li = this.$el.find("li");
@@ -104,6 +103,7 @@
 
   View.prototype.step = function () {
     this.board.stepPiece();
+    this.board.checkAndDeleteFullRows();
     this.render();
   };
 
@@ -111,7 +111,7 @@
   };
 
   View.prototype.renderStats = function () {
-    var $stats = this.$el.find(".stats");
+    var $stats = $(".tetris-game-stats");
     var html = "<div class=\"level-container\">" + this.board.level + "</div>";
     html += "<div class=\"cleared-rows-container\">" + this.board.clearedRows + "</div>";
     $stats.html(html);

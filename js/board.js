@@ -34,16 +34,13 @@
     }
   };
 
-  Board.prototype.checkPiece = function () {
-
-  };
-
   Board.prototype.checkAndDeleteFullRows = function () {
     var fullRows = this.findFullRows();
     if (fullRows.length > 0) {
       this.deleteFullRows(fullRows);
       this.shiftRowsDown(fullRows);
       this.updateRowBlocks(fullRows);
+      this.clearedRows += fullRows.length;
     }
   }
 

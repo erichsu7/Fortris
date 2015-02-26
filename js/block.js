@@ -76,7 +76,6 @@
       for (var i = 0; i < rowBlocks.length; i++) {
         var rowBlock = rowBlocks[i];
         if (rowBlock.coord.j === this.coord.j - 1) {
-          debugger;
           return true;
         }
       }
