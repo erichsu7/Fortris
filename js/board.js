@@ -26,15 +26,16 @@
   };
 
   Board.prototype.stepPiece = function () {
-    this.piece.moveDown();
-  };
-
-  Board.prototype.checkPiece = function () {
     if (this.piece.isPlaced()) {
       this.addPiece(this.piece);
       this.piece = new Tetris.Piece.Random(this);
-      this.checkAndDeleteFullRows();
+    } else {
+      this.piece.moveDown();
     }
+  };
+
+  Board.prototype.checkPiece = function () {
+
   };
 
   Board.prototype.checkAndDeleteFullRows = function () {

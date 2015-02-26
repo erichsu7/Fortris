@@ -75,7 +75,8 @@
     if (rowBlocks) {
       for (var i = 0; i < rowBlocks.length; i++) {
         var rowBlock = rowBlocks[i];
-        if (this.coord.j === rowBlock.coord.j - 1) {
+        if (rowBlock.coord.j === this.coord.j - 1) {
+          debugger;
           return true;
         }
       }
@@ -90,7 +91,7 @@
     if (rowBlocks) {
       for (var i = 0; i < rowBlocks.length; i++) {
         var rowBlock = rowBlocks[i];
-        if (this.coord.j === rowBlock.coord.j + 1) {
+        if (rowBlock.coord.j === this.coord.j + 1) {
           return true;
         }
       }

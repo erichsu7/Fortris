@@ -43,7 +43,9 @@
           this.board.piece.moveRight();
           break;
         case 40:
-          this.board.piece.moveDown();
+          if (!this.board.piece.isPlaced()) {
+            this.board.piece.moveDown();
+          }
           break;
         default:
           break;
@@ -53,7 +55,6 @@
   };
 
   View.prototype.render = function () {
-    this.board.checkPiece();
     this.setupGrid();
     this.renderPiece();
     this.renderBlocks();
@@ -102,13 +103,8 @@
   };
 
   View.prototype.step = function () {
-    if (this.board.piece.isPlaced()) {
-      console.log("Game over");
-    } else {
-      this.board.stepPiece();
-      this.render();
-      this.isOver();
-    }
+    this.board.stepPiece();
+    this.render();
   };
 
   View.prototype.isOver = function() {
