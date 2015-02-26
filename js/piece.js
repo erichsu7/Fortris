@@ -41,7 +41,7 @@
 
   Piece.prototype.isAtBottom = function () {
     var that = this;
-    for (i = 0; i < this.blocks.length; i++) {
+    for (var i = 0; i < this.blocks.length; i++) {
       var block = this.blocks[i];
       if (block.isAtBottom()) {
         return true;
@@ -51,7 +51,7 @@
   };
 
   Piece.prototype.isOnBlock = function () {
-    for (i = 0; i < this.blocks.length; i++) {
+    for (var i = 0; i < this.blocks.length; i++) {
       var block = this.blocks[i];
       if (block.isOnBlock()) {
         return true;
@@ -61,7 +61,7 @@
   };
 
   Piece.prototype.isInBlock = function () {
-    for (i = 0; i < this.blocks.length; i++) {
+    for (var i = 0; i < this.blocks.length; i++) {
       var block = this.blocks[i];
       if (block.isInBlock()) {
         return true;
@@ -71,7 +71,7 @@
   };
 
   Piece.prototype.isOffScreen = function () {
-    for (i = 0; i < this.blocks.length; i++) {
+    for (var i = 0; i < this.blocks.length; i++) {
       var block = this.blocks[i];
       if (block.isOffScreen()) {
         return true;
@@ -81,7 +81,7 @@
   };
 
   Piece.prototype.hasBlockOnRight = function () {
-    for (i = 0; i < this.blocks.length; i++) {
+    for (var i = 0; i < this.blocks.length; i++) {
       var block = this.blocks[i];
       if (block.hasBlockOnRight()) {
         return true;
@@ -91,7 +91,7 @@
   };
 
   Piece.prototype.hasBlockOnLeft = function () {
-    for (i = 0; i < this.blocks.length; i++) {
+    for (var i = 0; i < this.blocks.length; i++) {
       var block = this.blocks[i];
       if (block.hasBlockOnLeft()) {
         return true;
@@ -133,7 +133,7 @@
   };
 
   Piece.prototype.isAtRightEdge = function () {
-    for (i = 0; i < this.blocks.length; i++) {
+    for (var i = 0; i < this.blocks.length; i++) {
       var block = this.blocks[i];
       if (block.isAtRightEdge()) {
         return true;
@@ -143,7 +143,7 @@
   };
 
   Piece.prototype.isAtLeftEdge = function () {
-    for (i = 0; i < this.blocks.length; i++) {
+    for (var i = 0; i < this.blocks.length; i++) {
       var block = this.blocks[i];
       if (block.isAtLeftEdge()) {
         return true;

@@ -29,10 +29,12 @@
   Block.prototype.isOnBlock = function () {
     var rowBelow = this.coord.i + 1;
     var rowBlocks = this.board.blocks[rowBelow];
-    for (i = 0; i < rowBlocks.length; i++) {
-      var rowBlock = rowBlocks[i];
-      if (this.coord.j === rowBlock.coord.j) {
-        return true;
+    if (rowBlocks) {
+      for (var i = 0; i < rowBlocks.length; i++) {
+        var block = rowBlocks[i];
+        if (this.coord.j === block.coord.j) {
+          return true;
+        }
       }
     }
     return false;
@@ -41,12 +43,15 @@
   Block.prototype.isInBlock = function () {
     var row = this.coord.i;
     var rowBlocks = this.board.blocks[row];
-    for (i = 0; i < rowBlocks.length; i++) {
-      var rowBlock = rowBlocks[i];
-      if (this.coord.j === rowBlock.coord.j) {
-        return true;
+    if (rowBlocks) {
+      for (var i = 0; i < rowBlocks.length; i++) {
+        var rowBlock = rowBlocks[i];
+        if (this.coord.j === rowBlock.coord.j) {
+          return true;
+        }
       }
     }
+
     return false;
   };
 
@@ -67,24 +72,30 @@
   Block.prototype.hasBlockOnLeft = function () {
     var row = this.coord.i;
     var rowBlocks = this.board.blocks[row];
-    for (i = 0; i < rowBlocks.length; i++) {
-      var rowBlock = rowBlocks[i];
-      if (this.coord.j === rowBlock.coord.j - 1) {
-        return true;
+    if (rowBlocks) {
+      for (var i = 0; i < rowBlocks.length; i++) {
+        var rowBlock = rowBlocks[i];
+        if (this.coord.j === rowBlock.coord.j - 1) {
+          return true;
+        }
       }
     }
+
     return false;
   };
 
   Block.prototype.hasBlockOnRight = function () {
     var row = this.coord.i;
     var rowBlocks = this.board.blocks[row];
-    for (i = 0; i < rowBlocks.length; i++) {
-      var rowBlock = rowBlocks[i];
-      if (this.coord.j === rowBlock.coord.j + 1) {
-        return true;
+    if (rowBlocks) {
+      for (var i = 0; i < rowBlocks.length; i++) {
+        var rowBlock = rowBlocks[i];
+        if (this.coord.j === rowBlock.coord.j + 1) {
+          return true;
+        }
       }
     }
+
     return false;
   };
 

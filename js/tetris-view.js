@@ -11,6 +11,10 @@
 
     this.step();
     $(window).on("keydown", this.handleKeyEvent.bind(this));
+    this.intervalId = window.setInterval(
+      this.step.bind(this),
+      View.STEP_MILLIS
+    )
   };
 
   View.KEYS = {
@@ -57,9 +61,14 @@
 
   View.prototype.renderBlocks = function () {
     var that = this;
-    for (var coord in this.board.blocks) {
-      var block = this.board.blocks[coord];
-      block && that.updateClasses(block.coord, block.color);
+    for (var row in this.board.blocks) {
+      var rowBlocks = this.board.blocks[row];
+      if (rowBlocks) {
+        for (var i = 0; i < rowBlocks.length; i++) {
+          var block = rowBlocks[i];
+          this.updateClasses(block.coord, block.color);
+        }
+      }
     }
   };
 
@@ -99,11 +108,6 @@
       this.board.stepPiece();
       this.render();
       this.isOver();
-      window.clearInterval(this.intervalId);
-      this.intervalId = window.setInterval(
-        this.step.bind(this),
-        View.STEP_MILLIS/this.board.level
-      );
     }
   };
 

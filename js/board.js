@@ -33,63 +33,50 @@
     if (this.piece.isPlaced()) {
       this.addPiece(this.piece);
       this.piece = new Tetris.Piece.Random(this);
-      var fullRows = this.findFullRows();
-      if (fullRows.length > 0) {
-        this.deleteFullRows(fullRows);
-        this.clearedRows += fullRows.length;
-        this.level = Math.floor(this.clearedRows / 10) + 1;
-      }
     }
   };
 
   Board.prototype.findFullRows = function () {
-    var rowsHash = {};
-    Object.keys(this.blocks).forEach(function (coordStr) {
-      var coordArray = coordStr.split(",");
-      var row = parseInt(coordArray[0]);
-      var col = parseInt(coordArray[1]);
-      if (rowsHash[row]) {
-        rowsHash[row].push(col);
-      } else {
-        rowsHash[row] = [col];
-      }
-    });
     var fullRows = [];
-    for (var row in rowsHash) {
-      if (rowsHash[row].length === this.cols) {
-        fullRows.push(row);
+    for (var i = 0; i < this.rows; i++) {
+      var rowBlocks = this.blocks[i];
+      if (rowBlocks.length === 10) {
+        fullRows.push(i);
       }
     }
     return fullRows;
   };
 
   Board.prototype.deleteFullRows = function (fullRows) {
-    for (i = 0; i < fullRows.length; i++) {
-      for (var coordStr in this.blocks) {
-        var coordArray = coordStr.split(",");
-        if (coordArray[0] === fullRows[i]) {
-          delete this.blocks[coordStr];
+    for (var i = 0; i < fullRows.length; i++) {
+      var row = fullRows[i];
+      delete this.blocks[row];
+    }
+    this.shiftRowsDown(fullRows);
+  };
+
+  Board.prototype.shiftRowsDown = function (fullRows) {
+    for (var i = 0; i < fullRows.length; i++) {
+      var fullRow = fullRows[i];
+      for (var j = fullRow; j >= 0; j--) {
+        if (j > 0) {
+          this.blocks[j] = this.blocks[j - 1];
+        } else {
+          this.blocks[j] = [];
         }
       }
     }
-    this.shiftBlocksDown(fullRows);
+
+    this.updateRowBlocks(fullRows)
   };
 
-  Board.prototype.shiftBlocksDown = function (fullRows) {
-    for (i = 0; i < fullRows.length; i++) {
-      for (var coordStr in this.blocks) {
-        var coordStrArray = coordStr.split(",").map(function(num) {
-          return parseInt(num);
-        });
-        if (coordStrArray[0] < parseInt(fullRows[i])) {
-          var block = this.blocks[coordStr];
-          if (block) {
-            block.moveDown();
-            var newCoordStr = block.coord.i + "," + block.coord.j;
-            this.blocks[newCoordStr] = block;
-            delete this.blocks[coordStr];
-          }
-        }
+  Board.prototype.updateRowBlocks = function (fullRows) {
+    var lastFullRow = fullRows[fullRows.length - 1];
+    for (var i = lastFullRow; i > 0; i--) {
+      var rowBlocks = this.blocks[i];
+      for (var j = 0; j < rowBlocks.length; j++) {
+        var block = rowBlocks[j];
+        block.coord.i = i;
       }
     }
   };
