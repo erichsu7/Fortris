@@ -33,14 +33,24 @@
     if (this.piece.isPlaced()) {
       this.addPiece(this.piece);
       this.piece = new Tetris.Piece.Random(this);
+      this.checkAndDeleteFullRows();
     }
   };
+
+  Board.prototype.checkAndDeleteFullRows = function () {
+    var fullRows = this.findFullRows();
+    if (fullRows.length > 0) {
+      this.deleteFullRows(fullRows);
+      this.shiftRowsDown(fullRows);
+      this.updateRowBlocks(fullRows);
+    }
+  }
 
   Board.prototype.findFullRows = function () {
     var fullRows = [];
     for (var i = 0; i < this.rows; i++) {
       var rowBlocks = this.blocks[i];
-      if (rowBlocks.length === 10) {
+      if (rowBlocks && rowBlocks.length === 10) {
         fullRows.push(i);
       }
     }
@@ -52,7 +62,6 @@
       var row = fullRows[i];
       delete this.blocks[row];
     }
-    this.shiftRowsDown(fullRows);
   };
 
   Board.prototype.shiftRowsDown = function (fullRows) {
@@ -66,17 +75,17 @@
         }
       }
     }
-
-    this.updateRowBlocks(fullRows)
   };
 
   Board.prototype.updateRowBlocks = function (fullRows) {
     var lastFullRow = fullRows[fullRows.length - 1];
     for (var i = lastFullRow; i > 0; i--) {
       var rowBlocks = this.blocks[i];
-      for (var j = 0; j < rowBlocks.length; j++) {
-        var block = rowBlocks[j];
-        block.coord.i = i;
+      if (rowBlocks) {
+        for (var j = 0; j < rowBlocks.length; j++) {
+          var block = rowBlocks[j];
+          block.coord.i = i;
+        }
       }
     }
   };
