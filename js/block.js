@@ -19,6 +19,13 @@
     "purple"
   ];
 
+  Block.prototype.isAtTop = function () {
+    if (this.coord.i === 0) {
+      return true;
+    };
+    return false;
+  }
+
   Block.prototype.isAtBottom = function () {
     if (this.coord.i === this.board.rows - 1) {
       return true;

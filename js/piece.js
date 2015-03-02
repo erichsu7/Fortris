@@ -39,6 +39,17 @@
     return this.isOnBlock() || this.isAtBottom();
   };
 
+  Piece.prototype.isAtTop = function () {
+    var that = this;
+    for (var i = 0; i < this.blocks.length; i++) {
+      var block = this.blocks[i];
+      if (block.isAtTop()) {
+        return true;
+      };
+    };
+    return false;
+  };
+
   Piece.prototype.isAtBottom = function () {
     var that = this;
     for (var i = 0; i < this.blocks.length; i++) {

@@ -36,6 +36,7 @@ body {
 }
 
 .tetris-game {
+  position: relative;
   display: inline-block;
   margin: 20px;
 }
@@ -126,6 +127,37 @@ label {
   .next-piece-display-area li:nth-last-child(2),
   .next-piece-display-area li:nth-last-child(1) {
   display: none;
+}
+
+.game-over-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+
+.game-over-screen {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.game-over-bar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+  /*background-color: rgba(0,0,0,0.7);*/
+}
+
+.game-over-bar > p {
+  font-size: 32px;
+  font-family: "Oswald";
+  background: -webkit-linear-gradient(red, yellow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border: none;
 }
 
 .red {

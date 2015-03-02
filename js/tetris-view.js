@@ -11,10 +11,6 @@
 
     this.step();
     $(window).on("keydown", this.handleKeyEvent.bind(this));
-    this.intervalId = window.setInterval(
-      this.step.bind(this),
-      View.STEP_MILLIS
-    )
   };
 
   View.KEYS = {
@@ -132,15 +128,25 @@
 
   View.prototype.step = function () {
     this.board.stepPiece();
-    this.render();
-    window.clearInterval(this.intervalId);
-    this.intervalId = window.setInterval(
-      this.step.bind(this),
-      View.STEP_MILLIS/this.board.level
-    )
+    if (this.isOver()) {
+      this.renderGameOver();
+      window.clearInterval(this.intervalId);
+      $(window).off();
+    } else {
+      this.render();
+      window.clearInterval(this.intervalId);
+      this.intervalId = window.setInterval(
+        this.step.bind(this),
+        View.STEP_MILLIS/this.board.level
+      );
+    }
   };
 
   View.prototype.isOver = function() {
+    if (this.board.piece.isAtTop() && this.board.piece.isPlaced()) {
+      return true;
+    }
+    return false;
   };
 
   View.prototype.renderStats = function () {
@@ -148,5 +154,13 @@
     $stats.find(".tetris-game-stats-score").html(this.board.score);
     $stats.find(".tetris-game-stats-level").html(this.board.level);
     $stats.find(".tetris-game-stats-cleared-rows").html(this.board.clearedRows);
+  };
+
+  View.prototype.renderGameOver = function () {
+    var $div = $("<div class=\"game-over-container\">");
+    var html = "<div class=\"game-over-screen\"></div>\n";
+    html += "<div class=\"game-over-bar\"><p>GAME OVER</p></div>"
+    $div.html(html);
+    this.$el.find(".tetris-game").append($div);
   }
 })();
