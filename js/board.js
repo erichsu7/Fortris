@@ -8,6 +8,7 @@
     this.cols = cols;
     this.blocks = {};
     this.piece = new Tetris.Piece.Random(this);
+    this.nextPiece = new Tetris.Piece.Random(this);
     this.score = 0;
     this.clearedRows = 0;
     this.level = 1;
@@ -30,7 +31,9 @@
     if (this.piece.isPlaced()) {
       this.addPiece(this.piece);
       this.checkAndDeleteFullRows();
-      this.piece = new Tetris.Piece.Random(this);
+      this.nextPiece.board = this;
+      this.piece = this.nextPiece;
+      this.nextPiece = new Tetris.Piece.Random(this);
     } else {
       this.piece.moveDown();
     }
@@ -44,7 +47,7 @@
       this.updateRowBlocks(fullRows);
       this.clearedRows += fullRows.length;
       this.addScore(fullRows.length);
-      this.level = this.level * 10 <= this.clearedRows ? this.level + 1 : this.level; 
+      this.level = this.level * 10 <= this.clearedRows ? this.level + 1 : this.level;
     }
   }
 
