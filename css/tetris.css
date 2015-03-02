@@ -30,7 +30,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #999;
+  background-color: #aaa;
   border-radius: 10px;
   font-family: "Lato";
 }
@@ -76,12 +76,19 @@ li:last-child {
 .tetris-game-stats-header {
   font-family: "Oswald";
   font-size: 32px;
+  background: -webkit-linear-gradient(blue, purple);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 p {
   font-size: 24px;
   text-align: center;
   width: 100%;
+  border: 1px solid #999;
+  border-radius: 5px;
+  background-color: #ddd;
+  color: #333;
 }
 
 label {
