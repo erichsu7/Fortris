@@ -8,6 +8,7 @@
     this.cols = cols;
     this.blocks = {};
     this.piece = new Tetris.Piece.Random(this);
+    this.score = 0;
     this.clearedRows = 0;
     this.level = 1;
   };
@@ -42,6 +43,8 @@
       this.shiftRowsDown(fullRows);
       this.updateRowBlocks(fullRows);
       this.clearedRows += fullRows.length;
+      this.addScore(fullRows.length);
+      this.level = this.level * 10 <= this.clearedRows ? this.level + 1 : this.level; 
     }
   }
 
@@ -89,7 +92,22 @@
     }
   };
 
-
+  Board.prototype.addScore = function (fullRowCount) {
+    switch (fullRowCount) {
+      case 1:
+        this.score += 100 * this.level;
+        break;
+      case 2:
+        this.score += 300 * this.level;
+        break;
+      case 3:
+        this.score += 500 * this.level;
+        break;
+      case 4:
+        this.score += 800 * this.level;
+        break;
+    }
+  };
 
 
 })();

@@ -97,15 +97,19 @@
       html += "</ul>";
     }
 
-    this.$el.html(html);
+    this.$el.find(".tetris-game").html(html);
     this.$li = this.$el.find("li");
     this.renderStats();
   };
 
   View.prototype.step = function () {
     this.board.stepPiece();
-    // this.board.checkAndDeleteFullRows();
     this.render();
+    window.clearInterval(this.intervalId);
+    this.intervalId = window.setInterval(
+      this.step.bind(this),
+      View.STEP_MILLIS/this.board.level
+    )
   };
 
   View.prototype.isOver = function() {
@@ -113,8 +117,8 @@
 
   View.prototype.renderStats = function () {
     var $stats = $(".tetris-game-stats");
-    var html = "<div class=\"level-container\">" + this.board.level + "</div>";
-    html += "<div class=\"cleared-rows-container\">" + this.board.clearedRows + "</div>";
-    $stats.html(html);
+    $stats.find(".tetris-game-stats-score").html(this.board.score);
+    $stats.find(".tetris-game-stats-level").html(this.board.level);
+    $stats.find(".tetris-game-stats-cleared-rows").html(this.board.clearedRows);
   }
 })();
