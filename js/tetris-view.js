@@ -57,7 +57,9 @@
 
   View.prototype.render = function () {
     this.setupGrid();
+    this.setupNextPieceGrid();
     this.renderPiece();
+    this.renderNextPiece();
     this.renderBlocks();
   }
 
@@ -81,10 +83,22 @@
     });
   };
 
+  View.prototype.renderNextPiece = function () {
+    var that = this;
+    this.board.nextPiece.blocks.forEach(function (block) {
+      that.updateClassesNextPiece(block.coord, block.color);
+    });
+  };
+
   View.prototype.updateClasses = function(coord, className) {
     var flatCoord = (coord.i * this.board.cols) + coord.j;
     this.$li.eq(flatCoord).addClass(className);
   };
+
+  View.prototype.updateClassesNextPiece = function (coord, className) {
+    var flatCoord = (coord.i * this.board.cols) + coord.j;
+    this.$liNextPiece.eq(flatCoord).addClass(className);
+  }
 
   View.prototype.setupGrid = function () {
     var html = "";
@@ -98,8 +112,22 @@
     }
 
     this.$el.find(".tetris-game").html(html);
-    this.$li = this.$el.find("li");
+    this.$li = this.$el.find(".tetris-game li");
     this.renderStats();
+  };
+
+  View.prototype.setupNextPieceGrid = function () {
+    var html = "";
+
+    for (var i = 0; i < 2; i++) {
+      html += "<ul>";
+      for (var j = 0; j < this.board.cols; j++) {
+        html += "<li></li>";
+      }
+      html += "</ul>";
+    }
+    this.$el.find(".next-piece-container").html(html);
+    this.$liNextPiece = this.$el.find(".next-piece-container li");
   };
 
   View.prototype.step = function () {
