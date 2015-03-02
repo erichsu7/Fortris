@@ -126,7 +126,7 @@
       }
       html += "</ul>";
     }
-    this.$el.find(".next-piece-container").html(html);
+    this.$el.find(".next-piece-display-area").html(html);
     this.$liNextPiece = this.$el.find(".next-piece-container li");
   };
 

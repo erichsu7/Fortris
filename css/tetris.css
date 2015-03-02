@@ -46,9 +46,7 @@ ul {
   height: 20px;
 }
 
-ul:last-child > li {
-  border-bottom: none;
-}
+
 
 li {
   display: inline-block;
@@ -62,6 +60,10 @@ li {
 
 li:last-child {
   border-right: none;
+}
+
+ul:last-child > li {
+  border-bottom: none;
 }
 
 .tetris-game-stats {
@@ -94,36 +96,64 @@ p {
 label {
   font-size: 16px;
   text-align: center;
-
 }
 
+.next-piece-container {
+  margin-top: 50px;
+}
+.next-piece-display-area {
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  background-color: #ddd;
+}
+
+.next-piece-display-area ul {
+  width: 100%;
+}
+
+.next-piece-display-area li {
+  background-color: transparent;
+  border: none;
+}
+
+.next-piece-display-area li:nth-child(1),
+  .next-piece-display-area li:nth-child(2),
+  .next-piece-display-area li:nth-child(3),
+  .next-piece-display-area li:nth-last-child(3),
+  .next-piece-display-area li:nth-last-child(2),
+  .next-piece-display-area li:nth-last-child(1) {
+  display: none;
+}
 
 .red {
-  background-color: #CC0000;
+  background-color: #CC0000 !important;
 }
 
 .orange {
-  background-color: #FF9900;
+  background-color: #FF9900 !important;
 }
 
 .yellow {
-  background-color: #FFFF99;
+  background-color: #FFFF99 !important;
 }
 
 .green {
-  background-color: #009900;
+  background-color: #009900 !important;
 }
 
 .blue {
-  background-color: #0066FF;
+  background-color: #0066FF !important;
 }
 
 .cyan {
-  background-color: #66FFFF;
+  background-color: #66FFFF !important;
 }
 
 .purple {
-  background-color: #6666FF;
+  background-color: #6666FF !important;
 }
 
 .red,
@@ -133,9 +163,8 @@ label {
   .blue,
   .cyan,
   .purple {
-    border-left: 3px solid rgba(0,0,0,0.1);
-    border-top: 3px solid rgba(0,0,0,0.1);
-    border-right: 3px solid rgba(0,0,0,0.5);
-    border-bottom: 3px solid rgba(0,0,0,0.5);
-    box-shadow: none;
+    border-left: 3px solid rgba(0,0,0,0.1) !important;
+    border-top: 3px solid rgba(0,0,0,0.1) !important;
+    border-right: 3px solid rgba(0,0,0,0.5) !important;
+    border-bottom: 3px solid rgba(0,0,0,0.5) !important;
   }
