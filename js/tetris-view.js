@@ -32,6 +32,7 @@
       switch (event.keyCode) {
         case 32:
           this.board.piece.snapDown();
+          this.board.stepPiece();
           break;
         case 37:
           this.board.piece.moveLeft();
@@ -103,7 +104,7 @@
 
   View.prototype.step = function () {
     this.board.stepPiece();
-    this.board.checkAndDeleteFullRows();
+    // this.board.checkAndDeleteFullRows();
     this.render();
   };
 

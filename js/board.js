@@ -28,6 +28,7 @@
   Board.prototype.stepPiece = function () {
     if (this.piece.isPlaced()) {
       this.addPiece(this.piece);
+      this.checkAndDeleteFullRows();
       this.piece = new Tetris.Piece.Random(this);
     } else {
       this.piece.moveDown();
