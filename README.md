@@ -12,7 +12,7 @@ Fortris is built with **JavaScript** and rendered with **jQuery** DOM manipulati
 
 ### Object Oriented Design
 
-Object orientation is a must for a game like Fortris. [Pieces](https://github.com/erichsu7/Fortris/blob/gh-pages/js/piece.js) are made of [blocks](https://github.com/erichsu7/Fortris/blob/gh-pages/js/block.js), which store [coordinates](https://github.com/erichsu7/Fortris/blob/gh-pages/js/coord.js). The [board](https://github.com/erichsu7/Fortris/blob/gh-pages/js/board.js) keeps track of its blocks. Pieces are further defined by their shape using [prototypal inheritance](https://github.com/erichsu7/Fortris/blob/gh-pages/js/inherit.js), since each shape of piece needs its own `Piece#rotate` function.
+Object orientation is a must for a game like Fortris. [Pieces](https://github.com/erichsu7/Fortris/blob/gh-pages/js/piece.js) are made of [blocks](https://github.com/erichsu7/Fortris/blob/gh-pages/js/block.js), which store [coordinates](https://github.com/erichsu7/Fortris/blob/gh-pages/js/coord.js). The [board](https://github.com/erichsu7/Fortris/blob/gh-pages/js/board.js) keeps track of its blocks. Pieces are further defined by their shape using [prototypal inheritance](https://github.com/erichsu7/Fortris/blob/gh-pages/js/inherit.js), since each [shape of piece](https://github.com/erichsu7/Fortris/tree/master/js/pieces) needs its own `Piece#rotate` function.
 
 ### Game Board
 
