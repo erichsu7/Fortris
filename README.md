@@ -8,7 +8,7 @@ Fortris is a browser-based version of the classic puzzle game, Tetris.
 
 ### Overview
 
-Fortris is built with *JavaScript* and rendered with *jQuery* DOM manipulation and *CSS* styling.
+Fortris is built with **JavaScript** and rendered with **jQuery** DOM manipulation and **CSS** styling.
 
 ### Object Oriented Design
 
