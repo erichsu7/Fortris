@@ -198,12 +198,13 @@ label {
   display: inline-block;
   margin-left: 5px;
   text-align: left;
+  height: auto;
 }
 
 .game-controls-container li {
   display: block;
   background-color: transparent;
-  height: auto;
+  height: 20px;
   width: auto;
   border: none;
   white-space: pre;
