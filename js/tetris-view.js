@@ -164,7 +164,8 @@
   View.prototype.renderGameOver = function () {
     var $div = $("<div class=\"game-over-container\">");
     var html = "<div class=\"game-over-screen\"></div>\n";
-    html += "<div class=\"game-over-bar\"><p>GAME OVER</p></div>"
+    html += "<div class=\"game-over-bar\"><p>GAME OVER</p></div>";
+    html += "<div class=\"restart-game-prompt\">Press any key to play again</div>";
     $div.html(html);
     this.$el.find(".tetris-game").append($div);
   }

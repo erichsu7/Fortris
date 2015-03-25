@@ -160,6 +160,14 @@ label {
   border: none;
 }
 
+.restart-game-prompt {
+  bottom: 150px;
+  position: absolute;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+}
+
 .red {
   background-color: #CC0000 !important;
 }
