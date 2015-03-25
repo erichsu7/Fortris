@@ -9,8 +9,7 @@
     this.board = new Tetris.Board(20, 10);
     this.setupGrid();
 
-    this.step();
-    $(window).on("keydown", this.handleKeyEvent.bind(this));
+    this.startGame();
   };
 
   View.KEYS = {
@@ -22,6 +21,12 @@
   };
 
   View.STEP_MILLIS = 1000;
+
+  View.prototype.startGame = function () {
+    this.render();
+    window.setTimeout(this.step.bind(this), View.STEP_MILLIS);
+    $(window).on("keydown", this.handleKeyEvent.bind(this));
+  };
 
   View.prototype.handleKeyEvent = function (event) {
     if (View.KEYS[event.keyCode]) {
