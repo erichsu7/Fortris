@@ -5,7 +5,9 @@
 
   var View = Tetris.View = function ($el) {
     this.$el = $el;
-    this.startGame();
+    this.generateNewBoard();
+    this.renderControls();
+    $(window).on("keydown", this.beginMovingPiece.bind(this));
   };
 
   View.KEYS = {
@@ -18,14 +20,23 @@
 
   View.STEP_MILLIS = 1000;
 
-  View.prototype.startGame = function () {
-    $(window).off();
+  View.prototype.generateNewBoard = function () {
     this.board = new Tetris.Board(20, 10);
     this.setupGrid();
     this.render();
+  };
+
+  View.prototype.beginMovingPiece = function () {
+    $(window).off();
     window.setTimeout(this.step.bind(this), View.STEP_MILLIS);
     $(window).on("keydown", this.handleKeyEvent.bind(this));
   };
+
+  View.prototype.restartGame = function () {
+    this.generateNewBoard();
+    this.beginMovingPiece();
+  };
+
 
   View.prototype.handleKeyEvent = function (event) {
     if (View.KEYS[event.keyCode]) {
@@ -170,7 +181,29 @@
     window.setTimeout(function () {
       var $div = "<div class=\"restart-game-prompt\">Press any key to play again</div>";
       that.$el.find(".game-over-container").append($div);
-      $(window).on("keydown", that.startGame.bind(that));
+      $(window).on("keydown", that.restartGame.bind(that));
     }, 1500)
-  }
+  };
+
+  View.prototype.renderControls = function () {
+    var $div = $("<div class=\"game-controls-container\">\n");
+    var html = "<p class=\"game-controls-header\">CONTROLS</p><br>";
+    html += "<ul class=\"game-controls-symbols\">\n";
+    html += "<li>&#9650;</li>\n";
+    html += "<li>&#9664;</li>\n";
+    html += "<li>&#9654;</li>\n";
+    html += "<li>&#9660;</li>\n";
+    html += "<li>[space]</li>\n";
+    html += "</ul>\n";
+    html += "<ul class=\"game-controls-descriptions\">\n";
+    html += "<li>Rotate</li>\n";
+    html += "<li>Move left</li>\n";
+    html += "<li>Move right</li>\n";
+    html += "<li>Move down</li>\n";
+    html += "<li>Snap down</li>\n";
+    html += "</ul>\n";
+    html += "</br></br><p>Press any key to start</p>\n";
+    $div.html(html);
+    this.$el.find(".tetris-game").append($div);
+  };
 })();

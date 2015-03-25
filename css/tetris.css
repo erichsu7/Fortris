@@ -168,6 +168,47 @@ label {
   width: 100%;
 }
 
+.game-controls-container {
+  position: absolute;
+  background-color: #eee;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  border-radius: 5px;
+  width: 160px;
+}
+
+.game-controls-container p {
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  width: auto;
+}
+
+.game-controls-symbols {
+  display: inline-block;
+  height: auto;
+  width: auto;
+  text-align: center;
+}
+
+.game-controls-descriptions {
+  display: inline-block;
+  margin-left: 5px;
+  text-align: left;
+}
+
+.game-controls-container li {
+  display: block;
+  background-color: transparent;
+  height: auto;
+  width: auto;
+  border: none;
+  white-space: pre;
+}
+
 .red {
   background-color: #CC0000 !important;
 }
