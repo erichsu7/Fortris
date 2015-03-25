@@ -5,10 +5,6 @@
 
   var View = Tetris.View = function ($el) {
     this.$el = $el;
-
-    this.board = new Tetris.Board(20, 10);
-    this.setupGrid();
-
     this.startGame();
   };
 
@@ -23,6 +19,8 @@
   View.STEP_MILLIS = 1000;
 
   View.prototype.startGame = function () {
+    this.board = new Tetris.Board(20, 10);
+    this.setupGrid();
     this.render();
     window.setTimeout(this.step.bind(this), View.STEP_MILLIS);
     $(window).on("keydown", this.handleKeyEvent.bind(this));
@@ -136,7 +134,6 @@
     if (this.isOver()) {
       this.renderGameOver();
       window.clearInterval(this.intervalId);
-      $(window).off();
     } else {
       this.render();
       window.clearInterval(this.intervalId);
@@ -162,11 +159,13 @@
   };
 
   View.prototype.renderGameOver = function () {
+    $(window).off();
     var $div = $("<div class=\"game-over-container\">");
     var html = "<div class=\"game-over-screen\"></div>\n";
     html += "<div class=\"game-over-bar\"><p>GAME OVER</p></div>";
     html += "<div class=\"restart-game-prompt\">Press any key to play again</div>";
     $div.html(html);
     this.$el.find(".tetris-game").append($div);
+    $(window).on("keydown", this.startGame.bind(this));
   }
 })();
