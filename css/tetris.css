@@ -21,6 +21,7 @@ body {
   width: 100%;
   background-image: url("../img/bg.jpg");
   background-size: cover;
+  background-color: #000;
 }
 
 .tetris-game-container {
